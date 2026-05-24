@@ -142,7 +142,7 @@ const App = {
                 </div>
                 <div class="text-right mb-4">
                     <span class="text-gray-600">Итого к оплате:</span>
-                    <span class="text-2xl font-black text-gray-900 ml-2">${cartData.total_price} ₽</span>
+                    <span class="text-2xl font-black text-gray-900 ml-2">${cartData.total_price} $</span>
                 </div>
         `;
 
@@ -228,11 +228,11 @@ const App = {
                             ${order.items.map(item => `
                                 <li class="flex justify-between">
                                     <span>${item.product_name} <span class="text-gray-400">x${item.quantity}</span></span>
-                                    <span class="font-medium">${(item.price * item.quantity).toFixed(2)} ₽</span>
+                                    <span class="font-medium">${(item.price * item.quantity).toFixed(2)} $</span>
                                 </li>
                             `).join('')}
                         </ul>
-                        <div class="text-right mt-4 pt-3 border-t font-bold text-gray-900 text-lg">Итого: ${order.total_cost} ₽</div>
+                        <div class="text-right mt-4 pt-3 border-t font-bold text-gray-900 text-lg">Итого: ${order.total_cost} $</div>
                     </div>
                 `;
             });
