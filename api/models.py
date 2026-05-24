@@ -16,8 +16,7 @@ class CustomUser(AbstractUser):
     phone_number = models.CharField(max_length=20, blank=True, null=True, verbose_name="Номер телефона")
     shipping_address = models.CharField(max_length=255, blank=True, null=True, verbose_name="Адрес доставки")
 
-    # Переопределяем поле USERNAME_FIELD, чтобы пользователь мог логиниться по email, 
-    # что является стандартом для современных интернет-магазинов.
+    # Переопределяем поле USERNAME_FIELD, чтобы пользователь мог логиниться по email
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username'] # username остается для совместимости с админкой
 
@@ -51,7 +50,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200, verbose_name="Название товара")
     description = models.TextField(blank=True, verbose_name="Описание")
     
-    # DecimalField идеально подходит для денег, исключает ошибки округления float
+    # DecimalField подходит для денег, исключает ошибки округления float
     price = models.DecimalField(
         max_digits=10, 
         decimal_places=2, 
@@ -60,7 +59,7 @@ class Product(models.Model):
     )
     stock = models.PositiveIntegerField(default=0, verbose_name="Остаток на складе")
     
-    # Для MVP можно хранить просто URL картинки, чтобы не возиться с облачными хранилищами
+    # Для MVP просто URL картинки, чтобы не возиться с облачными хранилищами
     image_url = models.URLField(blank=True, null=True, verbose_name="Ссылка на изображение")
     
     is_active = models.BooleanField(default=True, verbose_name="Активен (в продаже)")

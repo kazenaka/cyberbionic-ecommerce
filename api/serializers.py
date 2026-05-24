@@ -30,7 +30,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     """ Сериализатор товара """
-    # Мы добавляем поле category_name, чтобы фронтенд сразу получил строку "Ноутбуки", а не просто ID категории "2"
+    # Добавляем поле category_name, чтобы фронтенд сразу получил строку "Ноутбуки", а не просто ID категории "2"
     category_name = serializers.CharField(source='category.name', read_only=True)
 
     class Meta:
