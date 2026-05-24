@@ -129,4 +129,7 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def get_cost(self):
+        # Если цена или количество еще не заданы (пустая форма в админке)
+        if not self.price or not self.quantity:
+            return 0
         return self.price * self.quantity
