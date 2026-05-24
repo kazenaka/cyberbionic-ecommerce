@@ -1,0 +1,14 @@
+# Виртуальное окружение
+venv/
+env/
+
+# Локальная база данных
+db.sqlite3
+
+# Системные файлы Windows/Mac
+.DS_Store
+Thumbs.db
+
+# Кэш Python
+__pycache__/
+*.pyc
