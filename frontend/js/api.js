@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://127.0.0.1:8000/api/v1'; 
+const API_BASE_URL = 'https://cybershop-api-sdyt.onrender.com/api/v1';
 
 const API = {
     // Получение токена из LocalStorage
