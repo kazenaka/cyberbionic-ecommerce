@@ -13,7 +13,7 @@ const Components = {
                 <h3 class="text-lg font-bold text-gray-800 mb-2">${product.name}</h3>
                 <p class="text-gray-600 text-sm mb-4 line-clamp-2">${product.description || 'Описание отсутствует'}</p>
                 <div class="mt-auto flex justify-between items-center">
-                    <span class="text-xl font-extrabold text-gray-900">${product.price} ₽</span>
+                    <span class="text-xl font-extrabold text-gray-900">${product.price} $</span>
                     ${product.stock > 0 
                         ? `<button onclick="App.addToCart(${product.id})" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-lg transition" title="В корзину">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
@@ -44,11 +44,11 @@ const Components = {
                 </div>
                 <div>
                     <h4 class="text-gray-800 font-semibold">${item.product.name}</h4>
-                    <p class="text-sm text-gray-500">${item.product.price} ₽ x ${item.quantity}</p>
+                    <p class="text-sm text-gray-500">${item.product.price} $ x ${item.quantity}</p>
                 </div>
             </div>
             <div class="text-lg font-bold text-gray-900">
-                ${item.subtotal} ₽
+                ${item.subtotal} $
             </div>
         </div>
     `,
