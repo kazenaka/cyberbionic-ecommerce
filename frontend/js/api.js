@@ -1,4 +1,10 @@
-const API_BASE_URL = 'https://cybershop-api-sdyt.onrender.com/api/v1';
+// Проверяем, запущен ли сайт на локальном компьютере
+const isLocalhost = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+
+// Если локально - стучимся в локальный Django. Если в интернете - стучимся на Render.
+const API_BASE_URL = isLocalhost 
+    ? 'http://127.0.0.1:8000/api/v1' 
+    : 'https://cybershop-api-sdyt.onrender.com/api/v1';
 
 const API = {
     // Получение токена из LocalStorage
