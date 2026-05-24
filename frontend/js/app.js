@@ -31,21 +31,75 @@ const App = {
         }
     },
 
-    async renderCatalog() {
-        const products = await API.getProducts();
-        if (!products) {
-            this.root.innerHTML = Components.EmptyState('Не удалось загрузить товары');
-            return;
-        }
+async renderCatalog() {
+        // 1. Рисуем "скелет" страницы с панелью фильтров
+        this.root.innerHTML = `
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-3xl font-bold text-gray-800">Каталог товаров</h1>
+            </div>
 
-        let html = `
-            <h1 class="text-3xl font-bold mb-8 text-gray-800">Каталог товаров</h1>
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-8 flex flex-wrap gap-4 items-end">
+                <div class="flex flex-col">
+                    <label class="text-xs text-gray-500 font-medium mb-1">Поиск</label>
+                    <input type="text" id="filter-search" placeholder="Название..." class="border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none w-48">
+                </div>
+                <div class="flex flex-col w-24">
+                    <label class="text-xs text-gray-500 font-medium mb-1">Цена от</label>
+                    <input type="number" id="filter-min" class="border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div class="flex flex-col w-24">
+                    <label class="text-xs text-gray-500 font-medium mb-1">Цена до</label>
+                    <input type="number" id="filter-max" class="border border-gray-300 p-2 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <button id="apply-filters" class="bg-blue-500 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-600 transition">Найти</button>
+                <button id="reset-filters" class="text-gray-500 hover:text-red-500 px-4 py-2 transition text-sm font-medium">Сбросить</button>
+            </div>
+
+            <div id="products-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="col-span-full flex justify-center py-10">
+                    <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500"></div>
+                </div>
+            </div>
         `;
-        
-        products.forEach(p => html += Components.ProductCard(p));
-        html += `</div>`;
-        this.root.innerHTML = html;
+
+        // 2. Функция загрузки товаров (с учетом параметров)
+        const loadProducts = async (queryString = '') => {
+            const products = await API.getProducts(queryString);
+            const grid = document.getElementById('products-grid');
+            
+            if (!products || products.length === 0) {
+                grid.innerHTML = Components.EmptyState('По вашему запросу ничего не найдено');
+                return;
+            }
+            
+            grid.innerHTML = products.map(p => Components.ProductCard(p)).join('');
+        };
+
+        // 3. Загружаем все товары при первом открытии
+        await loadProducts();
+
+        // 4. Обработчик кнопки "Найти"
+        document.getElementById('apply-filters').onclick = () => {
+            const search = document.getElementById('filter-search').value;
+            const min = document.getElementById('filter-min').value;
+            const max = document.getElementById('filter-max').value;
+            
+            let params = new URLSearchParams();
+            if (search) params.append('search', search); 
+            if (min) params.append('min_price', min);
+            if (max) params.append('max_price', max);
+            
+            const queryString = params.toString() ? '?' + params.toString() : '';
+            loadProducts(queryString); // Перерисовываем товары с фильтром
+        };
+
+        // 5. Обработчик кнопки "Сбросить"
+        document.getElementById('reset-filters').onclick = () => {
+            document.getElementById('filter-search').value = '';
+            document.getElementById('filter-min').value = '';
+            document.getElementById('filter-max').value = '';
+            loadProducts(); // Грузим всё заново
+        };
     },
 
     renderLogin() {

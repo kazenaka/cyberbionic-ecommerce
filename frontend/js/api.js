@@ -45,7 +45,7 @@ const API = {
     },
 
     // Бизнес-логика (обрати внимание на запятые в конце каждой строки)
-    getProducts: () => API.request('/products/'),
+    getProducts: (queryString = '') => API.request(`/products/${queryString}`),
     register: (userData) => API.request('/register/', 'POST', userData),
     login: (credentials) => API.request('/login/', 'POST', credentials),
     getProfile: () => API.request('/profile/'),
