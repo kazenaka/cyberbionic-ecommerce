@@ -30,13 +30,13 @@
 ## 🚀 Запуск проекта для локальной разработки
 
 ### 1. Клонирование репозитория
-bash
+```bash
 git clone https://github.com/ВАШ_НИК/cyberbionic-ecommerce.git
 cd cyberbionic-ecommerce
 
 ### 2. Настройка Backend
 Создайте и активируйте виртуальное окружение:
-bash
+```bash
 
 # Для Windows
 python -m venv venv
@@ -47,19 +47,19 @@ python3 -m venv venv
 source venv/bin/activate
 
 Установите зависимости:
-bash
+```bash
 pip install -r requirements.txt
 
 Примените миграции (создастся локальная база db.sqlite3):
-bash
+```bash
 python manage.py migrate
 
 Создайте суперпользователя для доступа в админку:
-bash
+```bash
 python manage.py createsuperuser
 
 Запустите локальный сервер разработки:
-bash
+```bash
 python manage.py runserver
 
 *Backend будет доступен по адресу: http://127.0.0.1:8000/*
