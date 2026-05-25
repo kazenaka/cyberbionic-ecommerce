@@ -6,7 +6,8 @@ import dj_database_url # Читает ссылки на базу данных
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # В облаке Render передаст нам переменную RENDER. Если её нет - мы локально (True), если есть - в продакшене (False)
-DEBUG = 'RENDER' not in os.environ
+# DEBUG = 'RENDER' not in os.environ
+DEBUG = True
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-cyberbionic-super-secret-key-123')
 ALLOWED_HOSTS = ['*']
 
