@@ -31,7 +31,7 @@
 
 ### 1. Клонирование репозитория
 ```bash
-git clone https://github.com/ВАШ_НИК/cyberbionic-ecommerce.git
+git clone https://github.com/kazenaka/cyberbionic-ecommerce.git
 cd cyberbionic-ecommerce
 ```
 ### 2. Настройка Backend
